@@ -941,8 +941,8 @@ caps.json文件内容：
     "platformName": "Android",
     "platformVersion": "5.1.1",
     "deviceName": "127.0.0.1:62001",
-    "appPackage": "com.lqr.wechat",
-    "appActivity": "com.lqr.wechat.ui.activity.SplashActivity",
+    "appPackage": "com.test.wechat",
+    "appActivity": "com.test.wechat.ui.activity.SplashActivity",
     "unicodeKeyboard": true,
     "resetKeyboard": true,
     "autoLaunch": false
