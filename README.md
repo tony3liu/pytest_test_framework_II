@@ -256,17 +256,17 @@ msg = MIMEText(content2, 'html', 'utf-8')
 - 组装邮件头: From、To及Subject
 ```
 ...
-msg['From'] = 'zhichao.han@qq.com'
-msg['To'] = 'superhin@126.com'
+msg['From'] = 'test@qq.com'
+msg['To'] = 'test@126.com'
 msg['Subject'] = '接口测试报告'
 ```
 msg['From']中也可以声明收件人名称，格式为：
 ```python
-msg['From'] = '<韩志超> zhichao.han@qq.com'
+msg['From'] = '<测试> test@qq.com'
 ```
 msg['To']中也可以写多个收件人，写到一个字符串中使用英文逗号隔开：
 ```python
-msg['To'] = 'superhin@126.com,ivan-me@163.com'
+msg['To'] = 'test@126.com,test2@126.com'
 ```
 > 注意邮件头的From、To只是一种声明，并不一定是实际的发件人和收件人，比如From写A邮箱，实际发送时，使用B邮箱的SMTP发送，便会形成代发邮件（B代表A发送）。
 
@@ -286,7 +286,7 @@ smtp = smtplib.SMTP_SSL('邮箱SMTP地址', 465)
 sendmail发送邮件时，使用的发件人邮箱和收件人邮箱是实践的发件人和收件人，可以和邮件头中的不一致。但是发件人邮箱必须和登录SMTP的邮箱一致。
 sendmail每次只能给一个收件人发送邮件，当有多个收件人是，可以使用多次sendmail方法，示例如下：
 ```python
-receivers = ['superhin@163.com', 'zhichao.han@qq.com']
+receivers = ['test@127.com', 'test@126.com']
 for person in receivers:
    smtp.sendmail('发件人邮箱', person, msg.as_string())
 ```
@@ -564,7 +564,7 @@ Utils实用方法层
 # test_baidu.py
 def test_baidu(selenium):
     selenium.get('https://www.baidu.com')
-    selenium.find_element_by_id('kw').send_keys('简书 韩志超')
+    selenium.find_element_by_id('kw').send_keys('测试')
     selenium.find_element_by_id('su').click()
 ```
 运行
@@ -616,7 +616,7 @@ from baidu_page import BaiduPage
 
 def test_baidu_page(selenium):
     baidu = BaiduPage(selenium)
-    baidu.search('简书 韩志超')
+    baidu.search('测试')
 ```
 ### 使用页面基类
 ```python
@@ -666,8 +666,8 @@ def baidu_page(selenium):
 ```python
 # test_baidu_page2.py
 def test_baidu_page(baidu_page):
-    baidu_page.search('简书 韩志超')
-    assert '韩志超' in baidu.driver.title
+    baidu_page.search('测试')
+    assert '测试' in baidu.driver.title
 ```
 ### 步骤渐进
 用例之间不应相互依赖，如果部分用例拥有相同的业务流程，如都需要，打开登录页->登录->点击添加商品菜单->进入添加商品页面
@@ -871,7 +871,7 @@ def pytest_addoption(parser):
 # pytest.ini
 ...
 email_subject = Test Report
-email_receivers = superhin@126.com,hanzhichao@secco.com
+email_receivers = test@126.com,test@127.com
 email_body = Hi,all\n, Please check the attachment for the Test Report.
 ```
 这里需要注意，自定义的配置选项需要先注册才能使用，注册方法如下。
